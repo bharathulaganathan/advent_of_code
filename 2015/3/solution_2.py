@@ -8,19 +8,34 @@ with open(file_path, "r") as input:
     # print(directions)
 
 houses = set()
-row = 0
-col = 0
-houses.add((row, col))
-for move in directions:
-    if move == "^":
+santa_row = 0
+santa_col = 0
+robo_row = 0
+robo_col = 0
+houses.add((0, 0))
+
+def move(row, col, direction):
+    if direction == "^":
         row += 1
-    elif move == "v":
+    elif direction == "v":
         row -= 1
-    elif move == ">":
+    elif direction == ">":
         col += 1
-    elif move == "<":
+    elif direction == "<":
         col -= 1
-    houses.add((row, col))
+    return (row, col)
+
+while len(directions) > 0:
+    santa_row, santa_col = move(santa_row, santa_col, directions[0])
+    houses.add((santa_row, santa_col))
+    directions = directions[1:]
+    if len(directions) > 0:
+        robo_row, robo_col = move(robo_row, robo_col, directions[0])
+        houses.add((robo_row, robo_col))
+        directions = directions[1:]
+# print(santa_houses)
+# print(robo_houses)
+
 
 print("Advent of Code 2015 Day 3")
 print(f"Part One: {len(houses)}")
