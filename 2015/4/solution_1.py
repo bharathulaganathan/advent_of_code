@@ -1,8 +1,13 @@
-import os
-base_dir = os.path.dirname(os.path.abspath(__file__))
-file_name = "input.txt"
-file_path = os.path.join(base_dir, file_name)
+import hashlib
 
+secret_key = "bgvyzdsv"
+num = 0
 
+while True:
+    input = secret_key + str(num)
+    md5_hash = hashlib.md5(input.encode()).hexdigest()
+    if md5_hash[:5] == "00000":
+        break
+    num += 1
 
-print()
+print(input)
