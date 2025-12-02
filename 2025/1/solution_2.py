@@ -1,12 +1,15 @@
+import os
+base_dir = os.path.dirname(os.path.abspath(__file__))
+file_name = "input.txt"
+file_path = os.path.join(base_dir, file_name)
+
 rotations = []
 
-file_name = "input.txt"
-with open(file_name, "r") as input:
+with open(file_path, "r") as input:
     for line in input:
         rotations.append(line.strip())
 
 dial = 50
-stop_0 = 0
 pass_0 = 0
 
 for rotation in rotations:
@@ -25,9 +28,5 @@ for rotation in rotations:
         if (click % 100) == 0:
             pass_0 += 1
     dial = new_dial % 100
-    if dial == 0:
-        stop_0 +=1
 
-print("Advent of Code 2025 Day 1")
-print(f"Part One: {stop_0}")
-print(f"Part Two: {pass_0}")
+print(pass_0)

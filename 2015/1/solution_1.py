@@ -13,5 +13,4 @@ for direction in directions:
     elif direction == ")":
         floors -= 1
 
-print("Advent of Code 2015 Day 25")
-print(f"Part One: {floors}")
+print(floors)

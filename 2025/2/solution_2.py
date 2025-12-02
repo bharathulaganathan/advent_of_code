@@ -1,9 +1,13 @@
 import copy
+import os
+base_dir = os.path.dirname(os.path.abspath(__file__))
+file_name = "input.txt"
+file_path = os.path.join(base_dir, file_name)
 
 numbers = []
 
 file_name = "input.txt"
-with open(file_name, "r") as input:
+with open(file_path, "r") as input:
     input = input.read()
     numbers = input.split(",")
 
@@ -44,7 +48,4 @@ for number in numbers:
                 invalid_sum_2 += int(between)
                 break
 
-            
-print("Advent of Code 2025 Day 2")
-print(f"Part One: {invalid_sum_1}")
-print(f"Part Two: {invalid_sum_2}")
+print(invalid_sum_2)

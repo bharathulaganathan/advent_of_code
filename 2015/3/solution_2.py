@@ -5,7 +5,6 @@ file_path = os.path.join(base_dir, file_name)
 
 with open(file_path, "r") as input:
     directions = input.read()
-    # print(directions)
 
 houses = set()
 santa_row = 0
@@ -33,10 +32,5 @@ while len(directions) > 0:
         robo_row, robo_col = move(robo_row, robo_col, directions[0])
         houses.add((robo_row, robo_col))
         directions = directions[1:]
-# print(santa_houses)
-# print(robo_houses)
 
-
-print("Advent of Code 2015 Day 3")
-print(f"Part One: {len(houses)}")
-# print(f"Part Two: {}")
+print(len(houses))

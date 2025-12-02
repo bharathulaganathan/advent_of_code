@@ -13,11 +13,8 @@ for turn in range(len(directions)):
         floors += 1
     elif directions[turn] == ")":
         floors -= 1
-    # print(f"{turn} {floors}")
     if floors == -1 and basement_search:
         basement_steps = turn + 1
         basement_search = False
 
-print("Advent of Code 2015 Day 25")
-print(f"Part One: {floors}")
-print(f"Part Two: {basement_steps}")
+print(basement_steps)

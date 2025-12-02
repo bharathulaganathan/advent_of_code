@@ -4,6 +4,7 @@ file_name = "input.txt"
 file_path = os.path.join(base_dir, file_name)
 
 rotations = []
+
 with open(file_path, "r") as input:
     for row in input:
         rotations.append(row.strip())

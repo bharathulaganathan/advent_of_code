@@ -1,7 +1,11 @@
+import os
+base_dir = os.path.dirname(os.path.abspath(__file__))
+file_name = "input.txt"
+file_path = os.path.join(base_dir, file_name)
+
 numbers = []
 
-file_name = "input.txt"
-with open(file_name, "r") as input:
+with open(file_path, "r") as input:
     input = input.read()
     numbers = input.split(",")
 
@@ -16,6 +20,5 @@ for number in numbers:
         half_between = int(len(between)/2)
         if between[:half_between] == between[half_between:]:
             invalid_sum += int(between)
-            
-print("Advent of Code 2025 Day 2")
-print(f"Part One: {invalid_sum}")
+
+print(invalid_sum)

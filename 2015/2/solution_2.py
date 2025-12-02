@@ -8,9 +8,6 @@ with open(file_path, "r") as input:
     for row in input:
         dimensions.append(row.strip())
 
-print(dimensions)
-
-wrapping = 0
 ribbon = 0
 
 for dimension in dimensions:
@@ -18,11 +15,6 @@ for dimension in dimensions:
     for dim in range(len(dimension)):
         dimension[dim] = int(dimension[dim])
     dimension.sort()
-    print(dimension)
-    wrapping += 2*(1.5*(dimension[0]*dimension[1]) + dimension[1]*dimension[2] + dimension[2]*dimension[0])
     ribbon += 2*(dimension[0]+dimension[1]) + dimension[0]*dimension[1]*dimension[2]
-    
-    
-print("Advent of Code 2015 Day 2")
-print(f"Part One: {int(wrapping)}")
-print(f"Part Two: {ribbon}")
+
+print(ribbon)
