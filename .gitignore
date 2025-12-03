@@ -1,4 +1,4 @@
 *_files/
 *.html
 *test*
-input.txt
+**/input.txt
