@@ -1,8 +1,25 @@
-import os
-base_dir = os.path.dirname(os.path.abspath(__file__))
-file_name = "input.txt"
-file_path = os.path.join(base_dir, file_name)
+num = 3113322113
+process = 50
 
+num = str(num)
 
+def calc(num, process):
+    for _ in range(process):
+        current_num = ""
+        count = 0
+        new_num = ""
+        for i in range(len(num)):
+            if num[i] == current_num:
+                count += 1
+            else:
+                if count > 0:
+                    new_num += str(count) + current_num
+                current_num = num[i]
+                count = 1
+        new_num += str(count) + current_num
+        num = new_num
+    return num
 
-print()
+num = calc(num, process)
+
+print(len(num))
