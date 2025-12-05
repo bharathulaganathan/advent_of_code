@@ -1,6 +1,6 @@
 import os
 base_dir = os.path.dirname(os.path.abspath(__file__))
-file_name = "input_example_1.txt"
+file_name = "input.txt"
 file_path = os.path.join(base_dir, file_name)
 
 fresh_range = []
@@ -17,21 +17,22 @@ with open(file_path, "r") as input:
 
 i = 0
 while i < len(fresh_range):
-    for j in range(i+1, len(fresh_range)):
+    while True:
         change = False
-        if ((fresh_range[i][0] >= fresh_range[j][0] and fresh_range[i][0] <= fresh_range[j][1])
-            or 
-            (fresh_range[i][1] >= fresh_range[j][0] and fresh_range[i][1] <= fresh_range[j][1])):
-            fresh_range[i][0] = min(fresh_range[i][0], fresh_range[j][0])
-            fresh_range[i][1] = max(fresh_range[i][1], fresh_range[j][1])
-            del fresh_range[j]
-            change = True
-            i = 0
+        for j in range(i+1, len(fresh_range)):
+            if ((fresh_range[i][0] >= fresh_range[j][0] and fresh_range[i][0] <= fresh_range[j][1])
+                or 
+                (fresh_range[i][1] >= fresh_range[j][0] and fresh_range[i][1] <= fresh_range[j][1])):
+                fresh_range[i][0] = min(fresh_range[i][0], fresh_range[j][0])
+                fresh_range[i][1] = max(fresh_range[i][1], fresh_range[j][1])
+                del fresh_range[j]
+                change = True
+            if change:
+                break
         if change:
-            break
-    if change:
-        continue
-    i += 1
+            continue
+        i += 1
+        break
 
 fresh_count = 0
 
