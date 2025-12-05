@@ -21,8 +21,12 @@ while i < len(fresh_range):
         change = False
         for j in range(i+1, len(fresh_range)):
             if ((fresh_range[i][0] >= fresh_range[j][0] and fresh_range[i][0] <= fresh_range[j][1])
-                or 
-                (fresh_range[i][1] >= fresh_range[j][0] and fresh_range[i][1] <= fresh_range[j][1])):
+                or
+                (fresh_range[i][1] >= fresh_range[j][0] and fresh_range[i][1] <= fresh_range[j][1])
+                or
+                (fresh_range[j][1] >= fresh_range[i][0] and fresh_range[j][1] <= fresh_range[i][1])
+                or
+                (fresh_range[j][1] >= fresh_range[i][0] and fresh_range[j][1] <= fresh_range[i][1])):
                 fresh_range[i][0] = min(fresh_range[i][0], fresh_range[j][0])
                 fresh_range[i][1] = max(fresh_range[i][1], fresh_range[j][1])
                 del fresh_range[j]
