@@ -67,7 +67,6 @@ while COUNT > 0:
         )
         COUNT -= 1
     del distances[min_index]
-    print(COUNT)
 
 connections = []
 
