@@ -2,3 +2,4 @@
 *.html
 *test*
 **/input.txt
+__pycache__/
