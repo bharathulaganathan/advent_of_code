@@ -13,69 +13,64 @@ with open(file_path, "r") as input:
 
 def main():
     for doc in docs:
-        nums = []
+        str_data = doc
         c = 0
-        while c < len(doc):
-            if is_num(doc[c]):
-                num = 0
-                c, num = get_num(c, doc)
-                nums.append(int(num))
-            elif is_red(c, doc):
-                c = get_dict(c, doc)
+        nums = set()
+        while c < len(str_data):
+            c, num = get_num(c, str_data)
+            if num is not None:
+                nums.add((c,num))
+            c = get_red(c, str_data, nums)
             c += 1
         total = 0
-        for num in nums:
-            total += num
+        for n in nums:
+            total += n[1]
         print(total)
 
 
-def is_num(char):
+def get_num(c, str_data):
     nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    if char in nums:
-        return True
-    return False
-
-
-def get_num(index, num):
-    new_num = ""
-    while index < len(num):
-        if is_num(num[index]):
-            if num[index - 1] == "-":
-                new_num = "-"
-            new_num = new_num + num[index]
-            index += 1
+    if str_data[c] not in nums:
+        return c, None
+    num = str_data[c]
+    if str_data[c-1] == "-":
+        num = "-" + num
+    c += 1
+    while c < len(str_data):
+        if str_data[c] in nums:
+            num = num + str_data[c]
+            c += 1
         else:
             break
-    return index, new_num
+    return c-1, int(num)
 
-
-def is_red(index, json):
-    if not json[index : index + 5] == '"red"':
-        return False
-    json_len = len(json)
-    while index >= 0 and index < json_len:
-        if json[index] == "[":
-            if json[index - 1] == ":":
-                return True
-            else:
-                return False
-        elif json[index] == ":":
-            return True
-        index -= 1
-    return False
-
-
-def get_dict(index, json):
-    count = 1
-    index += 4
-    json_len = len(json)
-    while count > 0 and index < json_len - 1:
-        index += 1
-        if json[index] == "}":
-            count -= 1
-        elif json[index] == "{":
-            count += 1
-    return index
+def get_red(c, str_data, nums):
+    red = c
+    if not str_data[c : c + 6] == ':"red"':
+        return c
+    bracket = 1
+    while c >= 0:
+        if str_data[c] == "{":
+            bracket -= 1
+        elif str_data[c] == "}":
+            bracket += 1
+        if bracket == 0:
+            break
+        c -= 1
+    sub = 0
+    while c < len(str_data):
+        if c < red:
+            c, num = get_num(c, str_data)
+            if num is not None:
+                nums.discard((c,num))
+        if str_data[c] == "{":
+            bracket += 1
+        elif str_data[c] == "}":
+            bracket -= 1
+        if bracket == 0:
+            break
+        c += 1
+    return c
 
 
 if __name__ == "__main__":
